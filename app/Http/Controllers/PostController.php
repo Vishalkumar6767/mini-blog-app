@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -22,7 +23,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        $categories = Category::all();
+    return view('posts.create', compact('categories'));
     }
 
     /**
@@ -55,11 +57,12 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        $categories = Category::all();
         if ($post->user_id !== auth()->id()) {
             abort(403, 'Unauthorized action.');
         }
     
-        return view('posts.edit', compact('post'));
+        return view('posts.edit', compact('post','categories'));
     }
 
     /**

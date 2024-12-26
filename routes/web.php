@@ -27,6 +27,7 @@ Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show')
 
 // AJAX search route
 Route::get('/search', [PostController::class, 'search'])->name('posts.search');
+Route::get('/posts/{post}/comments', [CommentController::class, 'index'])->name('comments.index');
 
 // Comment routes
 Route::middleware(['auth'])->group(function () {
